@@ -52,7 +52,7 @@ function lruKeyToRaw (lruKey: string) {
 function updateLruCache(lruKey: string) {
   const targetIndex = lru.indexOf(lruKey)
   // 新增
-  if (targetIndex !== -1) {
+  if (targetIndex === -1) {
     if (lru.length + 1 > MAX_CACHE_COUNT) {
       const removedKey = lru.shift()!
       const { id, requestKey } = lruKeyToRaw(removedKey)
