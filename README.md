@@ -1,22 +1,22 @@
-# requestCacheManager
+# request-cache-manager
 
-`requestCacheManager` 是一个用于缓存相同入参的函数调用结果的库，支持设置缓存时间和最大缓存数量。
+`request-cache-manager` 是一个用于缓存相同入参的函数调用结果的库，支持设置缓存时间和最大缓存数量。
 
 ## 安装
 
 使用 npm 安装：
 
 ```sh
-npm install requestCacheManager
+npm install request-cache-manager
 ```
 使用 yarn 安装：
 ```sh
-yarn add requestCacheManager
+yarn add request-cache-manager
 ```
 ## 使用方法
 首先需要初始化配置：
 ```ts
-import { init } from 'requestCacheManager';
+import { init } from 'request-cache-manager';
 
 const config = {
   expireTime: 1000 * 60 * 5, // 缓存过期时间，默认为 3 分钟
@@ -48,7 +48,7 @@ cachedFetchData(1).then((data) => {
 ## 清除缓存
 当数据源更新时，可以通过事件清除缓存：
 ```ts
-import { emitter } from 'requestCacheManager';
+import { emitter } from 'request-cache-manager';
 
 // 触发事件清除缓存, createCachedRequest的第二个参数
 emitter.emit('fetchData');
@@ -59,7 +59,7 @@ emitter.emit('fetchData');
 - maxCacheCount：每个请求的最大缓存数量，默认为 50。
 ## 完整示例
 ```ts
-import { init, emitter } from 'requestCacheManager';
+import { init, emitter } from 'request-cache-manager';
 
 const config = {
   expireTime: 1000 * 60 * 5, // 缓存过期时间，默认为 3 分钟
