@@ -66,7 +66,7 @@ function updateLruCache(lruKey: string) {
   lru.push(lruKey)
 }
 
-export function createCachedRequest(fn: (...args: any[]) => unknown, id?: string) {
+export function createCachedRequest<T, U extends any[]>(fn: (...args: U) => Promise<T | null>, id?: string) {
   if (!id) {
     id = fn.name
   }
@@ -79,7 +79,7 @@ export function createCachedRequest(fn: (...args: any[]) => unknown, id?: string
   emitter.off(id, clearCache)
   emitter.on(id, clearCache)
 
-  return async function cachedRequest<T = unknown>(...args: any[]) {
+  return async function cachedRequest(...args: Parameters<typeof fn>): ReturnType<typeof fn> {
     const requestKey = JSON.stringify(args)
     const now = Date.now()
     const cacheEntry = cacheRecord[id] || (cacheRecord[id] = Object.create(null))
@@ -96,7 +96,7 @@ export function createCachedRequest(fn: (...args: any[]) => unknown, id?: string
     // 控制并发, 如果有锁, 等待锁释放
     if (curLock) {
       return new Promise((resolve, reject) => {
-        curLock.push([resolve, reject])
+        curLock.push([resolve as any, reject])
       })
     }
 
