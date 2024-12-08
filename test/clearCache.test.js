@@ -1,4 +1,7 @@
-import { createCachedRequest, emitter } from '../dist/bundle.js';
+import { init, emitter } from '../lib/index.js';
+
+const createCachedRequest = init()
+
 import {expect, test, jest} from '@jest/globals';
 function sleep(time) {
   return new Promise((resolve) => {

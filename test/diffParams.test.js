@@ -1,5 +1,8 @@
-import { createCachedRequest } from '../dist/bundle.js';
+import { init } from '../lib/index.js';
 import {expect, test, jest} from '@jest/globals';
+
+const createCachedRequest = init()
+
 test('不同请求的基础数据入参, 缓存数据应该不一致', async () => {
   const fn = (id) => {
     return new Promise((resolve) => {

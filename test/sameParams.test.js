@@ -1,6 +1,7 @@
-import { createCachedRequest } from '../dist/bundle.js';
+import { init } from '../lib/index.js';
 import {expect, test, jest} from '@jest/globals';
 
+const createCachedRequest = init()
 
 test('相同请求的基础数据入参, 缓存数据应该一致', async () => {
   const fn = (id) => {
